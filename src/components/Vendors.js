@@ -1,13 +1,14 @@
 // SendEmail.js
 import React, { useState, useEffect } from 'react';
 import { Button, Col, Row } from 'react-bootstrap';
+import Alerts from './Alerts';
 
 export default function Vendors() {
   const [vendors, setVendors] = useState([]);
-
+  const [alert, setAlert] = useState(true);
 
   const getVendors = async () =>{
-    const response = await fetch(`http://localhost:8081/vendor`, {
+    const response = await fetch(`http://localhost:4600/vendor`, {
         method: "GET",
         mode: "cors",
         headers: {
@@ -23,7 +24,7 @@ export default function Vendors() {
   }, []);
 
   const sendEmail = async(name,email,upi) => {
-    await fetch(`http://localhost:8081/email`, {
+    await fetch(`http://localhost:4600/email`, {
         method: "POST",
         mode: "cors",
         headers: {
@@ -31,10 +32,15 @@ export default function Vendors() {
         },
         body: JSON.stringify({ name,email,upi }),
       });
+      setAlert(false);
   };
 
   return (
     <div className="container">
+      <Alerts message={
+            "Mail sent successfully!! Browse to view Mail list to view the recently sent one"
+          }
+          hidden={alert}></Alerts>
       <div className="container my-5">
         <div
           style={{

@@ -3,10 +3,10 @@ import { Alert } from "react-bootstrap";
 
 
 export default function Alerts(props) {
-    const {message, hidden ,type} = props;
+    const {message, hidden} = props;
     return (
       <div hidden={hidden}>
-        <div className={`alert alert-${type}`} role="alert">
+        <div className="alert alert-success" role="alert">
           {message}
           {/* <button
           type="button"

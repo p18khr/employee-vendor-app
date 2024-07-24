@@ -12,7 +12,7 @@ export default function VendorManagement() {
 
   const addVendor = async (event) => {
     if (name !== "" && upi !== "" && email !== "") {
-      await fetch(`http://localhost:8081/vendor`, {
+      await fetch(`http://localhost:4600/vendor`, {
         method: "POST",
         mode: "cors",
         headers: {

@@ -7,7 +7,7 @@ export default function ViewEmails() {
   const [emails, setEmails] = useState([]);
 
   const getEmails = async () => {
-    const response = await fetch(`http://localhost:8081/email`, {
+    const response = await fetch(`http://localhost:4600/email`, {
       method: "GET",
       mode: "cors",
       headers: {

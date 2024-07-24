@@ -7,7 +7,7 @@ export default function Employees() {
 
 
   const getEmployees = async () =>{
-    const response = await fetch(`http://localhost:8081/employee`, {
+    const response = await fetch(`http://localhost:4600/employee`, {
         method: "GET",
         mode: "cors",
         headers: {
@@ -23,7 +23,7 @@ export default function Employees() {
   }, []);
 
   const sendEmail = async(name,email,upi) => {
-    await fetch(`http://localhost:8081/email`, {
+    await fetch(`http://localhost:4600/email`, {
         method: "POST",
         mode: "cors",
         headers: {

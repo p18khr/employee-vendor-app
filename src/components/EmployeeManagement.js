@@ -13,7 +13,7 @@ export default function EmployeeManagement() {
 
   const addEmployee = async (event) => {
     if(name !== "" && designation !== "" && email !== "" && ctc !==""){
-        await fetch(`http://localhost:8081/employee`, {
+        await fetch(`http://localhost:4600/employee`, {
             method: "POST",
             mode: "cors",
             headers: {
