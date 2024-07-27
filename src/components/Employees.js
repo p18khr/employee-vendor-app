@@ -4,6 +4,7 @@ import { Button, Col, Row } from 'react-bootstrap';
 
 export default function Employees() {
   const [employees, setEmployees] = useState([]);
+  const [search,setSearch] = useState();
 
 
   const getEmployees = async () =>{
@@ -18,20 +19,33 @@ export default function Employees() {
       setEmployees(json);
   }
 
+  const searchEmployees = async () =>{
+    const response = await fetch(`http://localhost:4600/employee/${search}`, {
+      method: "GET",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const json = await response.json();
+    setEmployees(json);
+  }
+
   useEffect(() => {
     getEmployees();
+    
   }, []);
 
-  const sendEmail = async(name,email,upi) => {
-    await fetch(`http://localhost:4600/email`, {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name,email,upi }),
-      });
-  };
+  // const sendEmail = async(name,email,upi) => {
+  //   await fetch(`http://localhost:4600/email`, {
+  //       method: "POST",
+  //       mode: "cors",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ name,email,upi }),
+  //     });
+  // };
 
   return (
     <div className="container">
@@ -45,6 +59,9 @@ export default function Employees() {
         >
           Employees List
         </div>
+        <input type='text' placeholder='search employee' onChange={(e)=>{setSearch(e.target.value)}}/>
+        <Button onClick={searchEmployees}></Button>
+
         <Row xs={1} md={1}>
           {employees.map((employee) => (
             <Col key={employee.id}>
@@ -56,7 +73,7 @@ export default function Employees() {
                     borderBottomRightRadius: "0",
                   }}
                 >
-                  Vendor Name: {employee.name}
+                  Employee Name: {employee.name}
                   <br />
                   
                 </div>
